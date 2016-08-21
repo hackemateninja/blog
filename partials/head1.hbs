@@ -1,0 +1,17 @@
+<header id="global-header" class="global-header navbar">
+    <nav role="navigation">
+        <div class="wrapper">
+            <a href="{{@blog.url}}"><img src="{{@blog.logo}}" alt="{{@blog.title}}" style="width: 40px; height: 45px;"></a>
+            <button type="button" class="mobile-menu" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="hidden">Menu</span></button>
+            <ul id="main-menu" class="navbar-collapse collapse">
+                {{#get "posts" filter="page:true"}}
+                    {{#foreach posts}}
+                        <li><a href="{{url}}">{{title}}</a></li>
+                    {{/foreach}}
+                {{/get}}
+                <li><a class="login" data-toggle="modal" data-target="#search">Buscar</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>

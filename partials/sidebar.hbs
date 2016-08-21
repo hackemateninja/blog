@@ -1,0 +1,34 @@
+<aside class="blog-sidebar">
+    <section class="blog-subscribe blog-subscribe-main widget">
+        <h3>Somos bastantes</h3>
+        <p>Suscríbete para pertenecer a un gran grupo de desarrolladores.</p>
+        <a class="button-blue large wide" data-toggle="modal" data-target="#blogsubscribe">Suscríbete ahora</a>
+    </section>
+
+    <section>
+        {{> "ads2"}} <br>
+    </section>
+
+    <section class="blog-text blog-text-dev widget">
+        <p>Últimos artículos:</p>
+        <ul>
+      {{#get "posts" limit="5" as |news|}}
+         {{#foreach news}}
+            <li><a href="{{url}}">{{title}}</a></li>
+        {{/foreach}}
+      {{/get}}
+        </ul>
+    </section>
+
+    <section class="popular-posts widget">
+        <h3>Mis <mark>Creaciones</mark> Hasta ahora</h3>
+        <ol>
+       {{#get "posts" filter="featured:true" limit="5" order="id asc" as |featured|}}
+           {{#foreach featured}}
+            <li><a href="{{url}}"><span class="number" aria-hidden="true">{{id}}</span><strong>{{title}}:</strong> {{excerpt words="10"}}</a></li>
+           {{/foreach}}
+        {{/get}}
+        </ol>
+    </section>
+
+</aside>

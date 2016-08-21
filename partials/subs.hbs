@@ -1,0 +1,20 @@
+<div class="modal fade" id="blogsubscribe" tabindex="-1" role="dialog" aria-labelledby="Email subscription modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <header class="modal-header">
+                <h4 class="modal-title">Una noticia nueva por día.</h4>
+                <a class="modal-close" data-dismiss="modal" aria-hidden="true" href="#"><span class="hidden">Close</span></a>
+            </header>
+            <div class="modal-body">
+                {{#if @labs.subscribers}}
+                    <section>
+                        <h5>Suscríbete a {{@blog.title}}</h5>
+                        <p>Mantente informado sobre mis actualizaciones</p>
+                        {{subscribe_form placeholder="Your email address"}}
+                        <span>o también mediante <a href="http://cloud.feedly.com/#subscription/feed/{{@blog.url}}/rss/">via RSS</a> con Feedly!</span>
+                    </section>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</div>

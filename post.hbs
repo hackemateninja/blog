@@ -1,0 +1,71 @@
+{{!< default}}
+
+<div class="wrap {{post_class}}">
+    <section class="blog-content">
+
+        <article>
+        {{#post}}
+
+            {{! If post is featured and has an image, make a big hero banner }}
+            {{#if image}}{{#if featured}}
+            <div class="hero">
+                <div class="hero-image" style="background-image: url({{image}});"></div>
+            </div>
+            {{/if}}{{/if}}
+
+            <a class="post-meta back-link" href="{{@blog.url}}">&larr; Regresar a la página principal</a>
+
+            <h1 class="post-title">{{{title}}}</h1>
+            <section class="post-meta">
+                <img class="author-img" src="{{author.image}}" alt="{{author.name}}" nopin="nopin" />
+                <span class="author-name">{{author}}</span>
+                on the
+                <time datetime="{{date format='YYYY-MM-DD'}}">{{date format="Do of MMMM YYYY"}}</time>
+                <span class="tags">{{tags prefix="en "}}</span>
+            </section>
+
+            <section class="post-content">
+                {{#if image}}{{#unless featured}}<img src="{{image}}" alt="{{title}}" />{{/unless}}{{/if}}
+                {{> "ads1"}}
+                {{content}}
+                {{> "ads3"}}
+            </section>
+
+            <footer class="post-footer">
+
+                <section class="author">
+                    <img class="author-img" src="{{author.image}}" alt="{{author.name}}" nopin="nopin" />
+                    <div class="author-meta">
+                        <h4>{{author.name}}</h4>
+                        <p>{{{author.bio}}} <a href="{{author.website}}">{{author.website}}</a></p>
+                        <strong>{{author.location}} - </strong><a href="{{facebook_url}}">Facebook -</a> <a href="{{twitter_url}}">Twitter</a>
+                    </div>
+                </section>
+
+                <section class="read-next">
+                    {{#next_post}}
+                    <a class="read-next-story {{#if image}}" style="background-image: url({{image}}){{else}}no-cover{{/if}}" href="{{url}}">
+                        <section class="post">
+                            <h2>{{title}}</h2>
+                            <p>{{excerpt words="19"}}&hellip;</p>
+                        </section>
+                    </a>
+                    {{/next_post}}
+                </section>
+
+                <a class="button-blue large wide" data-toggle="modal" data-target="#blogsubscribe">Susbríbete para estar informado</a>
+
+            </footer>
+
+            <section class="comments">
+                {{> "disqus"}}
+            </section>
+
+        {{/post}}
+        </article>
+
+    </section>
+
+    {{> sidebar}}
+
+</div>

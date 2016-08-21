@@ -1,0 +1,359 @@
+@import url(//fonts.googleapis.com/css?family=Quicksand:400,700);a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,caption,center,cite,code,dd,del,details,dfn,div,dl,dt,em,embed,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,output,p,pre,q,ruby,s,samp,section,small,span,strike,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,tt,u,ul,var,video{margin:0;padding:0;border:0;font-size:100%;font-weight:inherit;font-style:inherit;font-family:inherit;vertical-align:baseline}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:after,blockquote:before,q:after,q:before{content:'';content:none}table{border-collapse:collapse;border-spacing:0}:focus{outline:0}html{-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%}article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section{display:block}audio,canvas,picture,progress,video{display:inline-block}template{display:none}input[type=search]::-webkit-search-cancel-button,input[type=search]::-webkit-search-decoration,input[type=search]::-webkit-search-results-button,input[type=search]::-webkit-search-results-decoration{-webkit-appearance:none}input[type=search]{-webkit-appearance:none;-webkit-box-sizing:content-box;-moz-box-sizing:content-box;box-sizing:content-box}textarea{overflow:auto;vertical-align:top;resize:vertical}::-moz-focus-inner{border:0;padding:0}
+
+// LEGACY COLORS
+$gray: #333;
+$brand: #b3c33a;
+
+// NEW COLORS
+$COLOR_GRAY: $gray;
+$COLOR_BRAND: $brand;
+
+// COLOR MAP (pixel art)
+$pixel-color-map: (
+	'o': transparent,
+	'k': #000000,
+	'h': #795f41,
+	'g': #7e6f5d,
+	'l': #e9d8bc,
+	's': #e0c9a4,
+	'd': #cbb490,
+	'x': #b6a281,
+);
+
+// SELF PORTRAIT PIXEL MAP
+$me:
+	(o o o h h h h h h o o o)
+	(o o h h h h h h h h o o)
+	(o h h l h h h h d h h o)
+	(o h l s s s s s d d h o)
+	(g l s s s s s s s d d g)
+	(g l s s s s s s s s d g)
+	(g l s d d s s d d s d g)
+	(x l s k k l s k k s d x)
+	(d l s s s l s s s s d d)
+	(o h s s s l s s s s h o)
+	(o h s s s d d s s d h o)
+	(o h h h h h h h h h h o)
+	(o o h h s s s x h h o o)
+	(o o o g s g g x g o o o)
+	(o o o g h g g h g o o o)
+	(o o o o g g g g o o o o);
+
+// Breakpoints
+$screen-xs: 480px !default;
+$screen-sm: 768px !default;
+$screen-md: 960px !default;
+$screen-lg: 1200px !default;
+$breakpoint-subtractor: 1px;
+$media-queries: true !default;
+
+// GRID
+$grid-GUTTER: 20px!default;
+$grid-COLUMN_COUNT: 12!default;
+
+// Function to read the matrix and pixelize it!
+@function pixelize($matrix, $size){
+    $l: length($matrix); // length of the entire
+    $sh: (); // shadows list
+    $i: $l; // length of the line
+    // read through the length of the matrix and decide on the box shadow color and position
+    @for $i from 1 through $l {
+        $row: nth($matrix,$i); //
+        @for $j from 1 through length($row){
+            $item: nth($row,$j);
+            @if map-has-key($pixel-color-map, $item) {
+                @if $item != 'o' {
+                    $sh:  $sh, ($j*$size) ($i*$size) map-get($pixel-color-map, $item);
+                }
+            } @else {
+                @warn 'there is no color specified in "$pixel-color-map" for: "#{$item}"';
+            }
+        }
+    }
+    // @debug $sh;
+    @return $sh;
+}
+
+@mixin pixelArt($matrix, $size){
+    // set width & height of icon based on size of pixels
+    width: ($size * length(nth($matrix,1)));
+    height: ($size * length($matrix));
+    &:after {
+        content: '';
+        // position everything from the top left corner
+        position: absolute;
+        top: (-$size);
+        left: (-$size);
+        width: $size;
+        height: $size;
+        box-shadow: pixelize($matrix,$size);
+    }
+}
+
+@mixin ball($radius, $color) {
+    width: $radius;
+    height: $radius;
+    background-color: $color;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -$radius*0.5;
+    margin-left: -$radius*0.5;
+    border-radius: 50%;
+}
+
+@mixin abs-center($w, $h) {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -$h*0.5;
+    margin-left: -$w*0.5;
+}
+
+@mixin pseudo-triangle($width, $height, $color, $direction) {
+    // Standard properties
+    width: 0;
+    height: 0;
+    // Pseudo Element properties
+    content: '';
+    position: absolute;
+    z-index: 2;
+    @if ($direction == "up") {
+        border-left: ($width/2) solid transparent;
+        border-right: ($width/2) solid transparent;
+        border-bottom: $height solid $color;
+    }
+    @else if ($direction == "down") {
+        border-left: ($width/2) solid transparent;
+        border-right: ($width/2) solid transparent;
+        border-top: $height solid $color;
+    }
+    @else if ($direction == "left") {
+        border-top: ($height/2) solid transparent;
+        border-bottom: ($height/2) solid transparent;
+        border-right: $width solid $color;
+    }
+    @else if ($direction == "right") {
+        border-top: ($height/2) solid transparent;
+        border-bottom: ($height/2) solid transparent;
+        border-left: $width solid $color;
+    }
+
+}
+
+@mixin breakpoint($point) {
+    @if $media-queries {
+        @if $point == XSM {
+            @media (min-width: $screen-xs) { @content; } // 480px
+        } @else if $point == XSM_INVERSE {
+            @media (max-width: $screen-xs - $breakpoint-subtractor) { @content; } // UP TO 480px
+        } @else if $point == SM {
+            @media (min-width: $screen-sm) { @content; } // 768px
+        } @else if $point == SM_INVERSE {
+            @media (max-width: $screen-sm - $breakpoint-subtractor) { @content; } // UP TO 768px
+        } @else if $point == MD {
+            @media (min-width: $screen-md) { @content; } // 960px
+        } @else if $point == MD_INVERSE {
+            @media (max-width: $screen-md - $breakpoint-subtractor) { @content; } // UP TO 960px
+        } @else if $point == LG {
+            @media (min-width: $screen-lg) { @content; } // 1260px
+        } @else if $point == LG_INVERSE {
+            @media (max-width: $screen-lg - $breakpoint-subtractor) { @content; } // UP TO 1260px
+        }
+    } @else {
+        @content;
+    }
+}
+
+@mixin isVisuallyHidden() {
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    border: 0;
+    position: absolute;
+    clip: rect(0 0 0 0);
+    overflow: hidden;
+}
+
+@mixin heart($size, $color) {
+    position: relative;
+    display: inline-block;
+    width: $size;
+    height: $size;
+    background-color: $color;
+    transform: rotate(45deg);
+    &:before,
+    &:after {
+        content: '';
+        position: absolute;
+        display: inline-block;
+        width: $size;
+        height: $size;
+        top: 0;
+        left: 0;
+        background-color: $color;
+        border-radius: 50%;
+    }
+    &:before {
+        left: $size * -0.5;
+    }
+    &:after {
+        top: $size * -0.5;
+    }
+}
+
+body {
+    background-color: $gray;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.hidden {
+	display: none;
+}
+
+.u-isVisuallyHidden {
+    @include isVisuallyHidden();
+}
+
+.footer {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.withanes {
+	display: block;
+	position: absolute;
+	right: 5px;
+	bottom: 5px;
+	@include pixelArt($me, 2px);
+}
+
+.withanes-name {
+    box-sizing: border-box;
+    position: absolute;
+    bottom: 4px;
+    right: 16px;
+    padding: 5px 7px;
+/*     width: 0; */
+    text-align: center;
+    font-size: 12px;
+    font-weight: 700;
+    background-color: white;
+    opacity: 0;
+    transform: translateX(0);
+    color: black;
+    white-space: nowrap;
+    overflow: hidden;
+    transition: opacity 250ms ease-in-out, width 0 linear 250ms, transform 250ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    &:after {
+        @include pseudo-triangle(8px, 10px, white, 'right');
+        position: absolute;
+        top: calc(50% - 5px);
+        right: -6px;
+    }
+}
+
+.withanes:hover .withanes-name {
+/*     width: 120px; */
+    overflow: visible;
+    opacity: 1;
+    transform: translateX(-20px) rotate(0deg);
+    box-shadow: 0 0 16px rgba(black, 0.33);
+    transition: opacity 125ms ease-in-out 100ms, transform 250ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.withanes:hover:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: -20px;
+}
+
+.withanes-name > .heart {
+    margin: 0 3px;
+    @include heart(6px, #D13E35);
+}
+
+.grid {
+    display: block; /* IE9 fallback for Flex */
+    display: flex; /* Using Flex for equal height containers */
+    flex-wrap: wrap; /* Children need to wrap */
+    margin-top: #{-$grid-GUTTER};
+    margin-left: #{-$grid-GUTTER};
+    align-items: stretch; /* For equal height */
+    font-size: 0; /* Horiontal gap fix for inline-block fallback */
+}
+
+.grid + .grid {
+    margin-top: 0; /* reset margin on stacked grids */
+}
+
+.grid-col {
+    box-sizing: border-box; /* Using box-sizing so padding doesn't affect width */
+    display: inline-block; /* IE9 fallback */
+    width: 100%;
+    padding-top: $grid-GUTTER;
+    padding-left: $grid-GUTTER;
+    vertical-align: top;
+    font-size: 16px; /* Resetting font-size for horizontal gap fix */
+}
+
+@for $i from 1 through $grid-COLUMN_COUNT {
+
+    .grid-col_#{$i}of#{$grid-COLUMN_COUNT} {
+        width: ($i / $grid-COLUMN_COUNT) * 100%;
+    }
+
+}
+
+@include breakpoint(SM) {
+    @for $i from 1 through $grid-COLUMN_COUNT {
+
+        .grid-col_#{$i}of#{$grid-COLUMN_COUNT}SM {
+            width: ($i / $grid-COLUMN_COUNT) * 100%;
+        }
+
+    }
+}
+
+@include breakpoint(MD) {
+    @for $i from 1 through $grid-COLUMN_COUNT {
+
+        .grid-col_#{$i}of#{$grid-COLUMN_COUNT}MD {
+            width: ($i / $grid-COLUMN_COUNT) * 100%;
+        }
+
+    }
+}
+
+.blocks {
+    margin: -30px 0 0 -30px; /* offset blocks horizontal and vertical spacing - must match padding of blocks items */
+    font-size: 0; /* remove inline block whitespace */
+}
+
+.blocks > * {
+    box-sizing: border-box;
+    display: inline-block;
+    padding: 30px 0 0 30px; /* space blocks horizontally and vertically - offset is handled by .blocks */
+    font-size: 16px; /* return the font size */
+}
+
+.blocks_2up > * {
+    width: 50%;
+}
+
+.blocks_3up > * {
+    width: 33.33333%; }
+
+.blocks_4up > * {
+    width: 25%;
+}
+
+.u-srOnly {
+    @include isVisuallyHidden();
+}

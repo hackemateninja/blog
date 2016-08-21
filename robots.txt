@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+Allow: /tag/
+Allow: /author/
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.jpg$
+Allow: /*.gif$
+Allow: /*.png$
+Allow: /*.svg$
+Allow: /*.jpeg$
+Disallow: /ghost/
+Sitemap: http://www.hackemate.ninja/sitemap.xml

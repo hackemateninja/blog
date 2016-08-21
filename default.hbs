@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    {{! Document Settings }}
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    {{! Page Meta }}
+    <title>{{meta_title}}</title>
+    <meta name="description" content="{{meta_description}}" />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" href="{{asset "/apple-touch-icon.png"}}">
+    <link rel="shortcut icon" href="{{asset "/favicon.ico"}}">
+    {{! Styles'n'Scripts }}
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+    <link href="https://ghost.org/assets/application-b28ae7a39daa8bb1cafe1e9aa145df74.css" media="all" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{asset "css/screen.css"}}" />
+
+    <meta property="twitter:site" content="@hackemate_ninja">
+    <meta property="twitter:domain" content="www.hackemate.ninja" />
+    <meta property="og:site_name" content="hackemate ninja" />
+    <meta property="fb:admins" content="1541844942729792" />
+
+    {{ghost_head}}
+</head>
+<body class="{{body_class}}">
+    <div id="fb-root"></div>
+    {{> "head1"}}
+
+    <main class="blog-wrapper" role="main">
+        <header class="blog-header">
+            <nav class="blog-nav">
+                {{navigation}}
+            </nav>
+        </header>
+
+        <div class="page-wrapper">
+            {{{body}}}
+            <div class="clearfix"></div>
+        </div>
+    </main>
+    {{> "search"}}
+    {{> "subs"}}
+
+    <div class="clearfix"></div>
+
+    {{> "footing"}}
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    {{ghost_foot}}
+
+    <script type="text/javascript" src="{{asset "js/navigation.js"}}"></script>
+    <script type="text/javascript" src="{{asset "js/jquery.fitvids.js"}}"></script>
+    <script type="text/javascript" src="{{asset "js/prism.js"}}"></script>
+    <script type="text/javascript" src="{{asset "js/index.js"}}"></script>
+    <script src="{{asset "js/jquery.ghostHunter.min.js"}}"></script>
+    <script>
+        $("#search-field").ghostHunter({
+            results   : "#results"
+        });
+    </script>
+</body>
+</html>

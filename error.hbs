@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    {{! Document Settings }}
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    {{! Page Meta }}
+    <title>{{meta_title}}</title>
+    <meta name="description" content="{{meta_description}}" />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" href="{{asset "/apple-touch-icon.png"}}">
+    <link rel="shortcut icon" href="{{asset "/favicon.ico"}}">
+    {{! Styles'n'Scripts }}
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+    <link href="https://ghost.org/assets/application-b28ae7a39daa8bb1cafe1e9aa145df74.css" media="all" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{asset "css/screen.css"}}" />
+    <link rel="stylesheet" type="text/css" href="{{asset "css/7534eb3fb62294822de9eace9.css"}}" />
+    <link rel="stylesheet" type="text/css" href="{{asset "css/normalize.css"}}" />
+    <link rel="stylesheet" type="text/css" href="{{asset "css/style.css"}}" />
+
+
+    <meta property="twitter:site" content="@hackemate_ninja">
+    <meta property="twitter:domain" content="www.hackemate.ninja" />
+    <meta property="og:site_name" content="hackemate ninja" />
+    <meta property="fb:admins" content="1541844942729792" />
+
+    {{ghost_head}}
+</head>
+
+    <link rel="stylesheet" href="css/normalize.css">
+
+    <link rel='stylesheet prefetch' href='css/7534eb3fb62294822de9eace9.css'>
+
+    <style>
+        /* NOTE: The styles were added inline because Prefixfree needs access to your styles and they must be inlined if they are on local disk! */
+        body {
+            background-color: white;
+        }
+
+        .error404page {
+            height: 800px;
+        }
+
+        .body404, .head404, .eyes404, .leftarm404, .rightarm404, .chair404, .leftshoe404, .rightshoe404, .legs404, .laptop404 {
+            background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/15979/404-character-new.png) 0 0 no-repeat;
+            width: 200px;
+            height: 200px;
+        }
+
+        .newcharacter404, .torso404, .body404, .head404, .eyes404, .leftarm404, .rightarm404, .chair404, .leftshoe404, .rightshoe404, .legs404, .laptop404 {
+            background-size: 750px;
+            position: absolute;
+            display: block;
+        }
+
+        .newcharacter404 {
+            width: 400px;
+            height: 800px;
+            left: 50%;
+            top: 20px;
+            margin-left: -200px;
+        }
+
+        .torso404 {
+            position: absolute;
+            display: block;
+            top: 138px;
+            left: 0px;
+            width: 389px;
+            height: 252px;
+            animation: sway 20s ease infinite;
+            transform-origin: 50% 100%;
+        }
+
+        .body404 {
+            position: absolute;
+            display: block;
+            top: 0px;
+            left: 0px;
+            width: 389px;
+            height: 253px;
+        }
+
+        .head404 {
+            position: absolute;
+            top: -148px;
+            left: 106px;
+            width: 160px;
+            height: 194px;
+            background-position: 0px -265px;
+            transform-origin: 50% 85%;
+            animation: headTilt 20s ease infinite;
+        }
+
+        .eyes404 {
+            position: absolute;
+            top: 92px;
+            left: 34px;
+            width: 73px;
+            height: 18px;
+            background-position: -162px -350px;
+            animation: blink404 10s steps(1) infinite, pan 10s ease-in-out infinite;
+        }
+
+        .leftarm404 {
+            position: absolute;
+            top: 159px;
+            left: 0;
+            width: 165px;
+            height: 73px;
+            background-position: -265px -341px;
+            transform-origin: 9% 35%;
+            transform: rotateZ(0deg);
+            animation: typeLeft 0.4s linear infinite;
+        }
+
+        .rightarm404 {
+            position: absolute;
+            top: 148px;
+            left: 231px;
+            width: 157px;
+            height: 91px;
+            background-position: -442px -323px;
+            transform-origin: 90% 25%;
+            animation: typeLeft 0.4s linear infinite;
+        }
+
+        .chair404 {
+            position: absolute;
+            top: 430px;
+            left: 55px;
+            width: 260px;
+            height: 365px;
+            background-position: -12px -697px;
+        }
+
+        .legs404 {
+            position: absolute;
+            top: 378px;
+            left: 4px;
+            width: 370px;
+            height: 247px;
+            background-position: -381px -443px;
+        }
+
+        .leftshoe404 {
+            position: absolute;
+            top: 591px;
+            left: 54px;
+            width: 130px;
+            height: 92px;
+            background-position: -315px -749px;
+        }
+
+        .rightshoe404 {
+            position: absolute;
+            top: 594px;
+            left: 187px;
+            width: 135px;
+            height: 81px;
+            background-position: -453px -749px;
+            transform-origin: 35% 12%;
+            animation: tapRight 1s linear infinite;
+        }
+
+        .laptop404 {
+            position: absolute;
+            top: 186px;
+            left: 9px;
+            width: 365px;
+            height: 216px;
+            background-position: -2px -466px;
+            transform-origin: 50% 100%;
+            animation: tapWobble 0.4s linear infinite;
+        }
+
+        @keyframes sway {
+            0% {
+                transform: rotateZ(0deg);
+            }
+            20% {
+                transform: rotateZ(0deg);
+            }
+            25% {
+                transform: rotateZ(4deg);
+            }
+            45% {
+                transform: rotateZ(4deg);
+            }
+            50% {
+                transform: rotateZ(0deg);
+            }
+            70% {
+                transform: rotateZ(0deg);
+            }
+            75% {
+                transform: rotateZ(-4deg);
+            }
+            90% {
+                transform: rotateZ(-4deg);
+            }
+            100% {
+                transform: rotateZ(0deg);
+            }
+        }
+        @keyframes headTilt {
+            0% {
+                transform: rotateZ(0deg);
+            }
+            20% {
+                transform: rotateZ(0deg);
+            }
+            25% {
+                transform: rotateZ(-4deg);
+            }
+            35% {
+                transform: rotateZ(-4deg);
+            }
+            38% {
+                transform: rotateZ(2deg);
+            }
+            42% {
+                transform: rotateZ(2deg);
+            }
+            45% {
+                transform: rotateZ(-4deg);
+            }
+            50% {
+                transform: rotateZ(0deg);
+            }
+            70% {
+                transform: rotateZ(0deg);
+            }
+            82% {
+                transform: rotateZ(0deg);
+            }
+            85% {
+                transform: rotateZ(4deg);
+            }
+            90% {
+                transform: rotateZ(4deg);
+            }
+            100% {
+                transform: rotateZ(0deg);
+            }
+        }
+        @keyframes typeLeft {
+            0% {
+                transform: rotateZ(0deg);
+            }
+            25% {
+                transform: rotateZ(7deg);
+            }
+            75% {
+                transform: rotateZ(-6deg);
+            }
+            100% {
+                transform: rotateZ(0deg);
+            }
+        }
+        @keyframes typeRight {
+            0% {
+                transform: rotateZ(0deg);
+            }
+            25% {
+                transform: rotateZ(-6deg);
+            }
+            75% {
+                transform: rotateZ(7deg);
+            }
+            100% {
+                transform: rotateZ(0deg);
+            }
+        }
+        @keyframes tapWobble {
+            0% {
+                transform: rotateZ(-0.2deg);
+            }
+            50% {
+                transform: rotateZ(0.2deg);
+            }
+            100% {
+                transform: rotateZ(-0.2deg);
+            }
+        }
+        @keyframes tapRight {
+            0% {
+                transform: rotateZ(0deg);
+            }
+            90% {
+                transform: rotateZ(-6deg);
+            }
+            100% {
+                transform: rotateZ(0deg);
+            }
+        }
+        @keyframes blink404 {
+            0% {
+                background-position: -162px -350px;
+            }
+            94% {
+                background-position: -162px -350px;
+            }
+            98% {
+                background-position: -162px -368px;
+            }
+            100% {
+                background-position: -162px -350px;
+            }
+        }
+        @keyframes pan {
+            0% {
+                transform: translateX(-2px);
+            }
+            49% {
+                transform: translateX(-2px);
+            }
+            50% {
+                transform: translateX(2px);
+            }
+            99% {
+                transform: translateX(2px);
+            }
+            100% {
+                transform: translateX(-2px);
+            }
+        }
+
+    </style>
+
+
+    <script src="js/prefixfree.min.js"></script>
+
+
+</head>
+
+<body>
+
+<div class="error404page">
+    <a class="post-meta back-link" href="{{@blog.url}}">&larr; Regresar a la página principal</a>
+    <div class="newcharacter404">
+        <div class="chair404"></div>
+        <div class="leftshoe404"></div>
+        <div class="rightshoe404"></div>
+        <div class="legs404"></div>
+        <div class="torso404">
+            <div class="body404"></div>
+            <div class="leftarm404"></div>
+            <div class="rightarm404"></div>
+            <div class="head404">
+                <div class="eyes404"></div>
+            </div>
+        </div>
+        <div class="laptop404"></div>
+    </div>
+</div>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/15979/footer-inject.js'></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+{{ghost_foot}}
+
+<script type="text/javascript" src="{{asset "js/prefixfree.min.js"}}"></script>
+<script type="text/javascript" src="{{asset "js/navigation.js"}}"></script>
+<script type="text/javascript" src="{{asset "js/jquery.fitvids.js"}}"></script>
+<script type="text/javascript" src="{{asset "js/prism.js"}}"></script>
+<script type="text/javascript" src="{{asset "js/index.js"}}"></script>
+<script src="{{asset "js/jquery.ghostHunter.min.js"}}"></script>
+<script>
+    $("#search-field").ghostHunter({
+        results   : "#results"
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<footer class="global-footer" id="global-footer">
+    <nav class="footer-nav-grid" role="navigation">
+        <ul class="footer-nav-column footer-nav-ghost">
+            <li class="footer-nav-heading">Artículos:</li>
+            {{#get "posts" limit="5" as |news|}}
+                {{#foreach news}}
+                    <li class="footer-nav-link"><a href="{{url}}">{{title}}</a></li>
+                {{/foreach}}
+            {{/get}}
+        </ul>
+        <ul class="footer-nav-column footer-nav-company">
+            <li class="footer-nav-heading">Desarrollos:</li>
+            {{#get "posts" filter="featured:true" limit="5" order="id asc" as |featured|}}
+                {{#foreach featured}}
+                    <li class="footer-nav-link"><a href="{{url}}">{{title}}</a></li>
+                {{/foreach}}
+            {{/get}}
+        </ul>
+        <ul class="footer-nav-column footer-nav-compare">
+            <li class="footer-nav-heading">About:</li>
+            {{#get "posts" filter="page:true" limit="5" as |pages|}}
+                {{#foreach pages}}
+                    <li class="footer-nav-link"><a href="{{url}}">{{title}}</a></li>
+                {{/foreach}}
+            {{/get}}
+        </ul>
+        <ul class="footer-nav-column footer-nav-developers">
+            <li class="footer-nav-heading">Social:</li>
+            <li class="footer-nav-link"><a href="{{facebook_url}}" target="_blank">Facebook</a></li>
+            <li class="footer-nav-link"><a href="{{twitter_url}}" target="_blank">Twitter</a></li>
+            <li class="footer-nav-link"><a href="https://www.youtube.com/c/nitrowittyoficial" target="_blank">Youtube</a></li>
+            <li class="footer-nav-link"><a href="https://github.com/hackemateninja" target="_blank">GitHub</a></li>
+            <li class="footer-nav-link"><a href="https://plus.google.com/u/0/+nitrowittyoficial" target="_blank">Google+</a></li>
+        </ul>
+        <ul class="footer-nav-column footer-nav-suport">
+            <li class="footer-nav-heading">Freelance:</li>
+            <li class="footer-nav-link"><a href="https://ninjahackerteam.slack.com/" target="_blank">Slack</a></li>
+            <li class="footer-nav-link"><a href="https://www.facebook.com/Nitroherman" target="_blank">Facebook Personal</a></li>
+            <li class="footer-nav-link"><a href="#">+502 42602688</a></li>
+            <li class="footer-nav-link"><a href="#">nitrowitty@gmail.com</a></li>
+            <li class="footer-nav-link"><a href="https://twitter.com/intent/tweet?text=%40hackemate_ninjat+Hi%21+Can+you+help+me+with+&related=hackemate_ninja\" onclick=\"window.open(this.href, 'twitter-share', 'width=550,height=235');return false;\">Envíame Tweets</a></li>
+        </ul>
+        <div class="clearfix"></div>
+    </nav>
+    <span class="poweredby"><img alt="digitalocean" src="https://ghost.org/assets/logo-minidigitalocean-1bb39c0755ac79befc56ca39d7889eb5.png"> Alojado <em>en</em> <a href="https://m.do.co/c/cdffe48883fa" target="_blank">DigitalOcean</a></span>
+</footer>
