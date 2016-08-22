@@ -23,9 +23,9 @@
     <section class="popular-posts widget">
         <h3>Mis <mark>Creaciones</mark> Hasta ahora</h3>
         <ol>
-       {{#get "posts" filter="featured:true" limit="5" order="id asc" as |featured|}}
+       {{#get "posts" filter="featured:true" limit="5" as |featured|}}
            {{#foreach featured}}
-            <li><a href="{{url}}"><span class="number" aria-hidden="true">{{id}}</span><strong>{{title}}:</strong> {{excerpt words="10"}}</a></li>
+            <li><a href="{{url}}"><span class="number" aria-hidden="true"><img src="{{@blog.logo}}" alt="{{@blog.title}}" style="width: 40px; height: 45px;"></span><strong>{{title}}:</strong> {{excerpt words="10"}}</a></li>
            {{/foreach}}
         {{/get}}
         </ol>
